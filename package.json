@@ -1,0 +1,14 @@
+{
+  "name": "luaprot",
+  "version": "1.1.1",
+  "description": "The official npm package for LuaProt. A documentation is not available yet.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "leon4564",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4"
+}
