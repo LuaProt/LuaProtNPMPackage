@@ -75,7 +75,7 @@ Methods follow the Discord bot's command names and argument order. `user` is a D
 | `/disconnect-session` | `disconnectSession(sessionId)` |
 | `/message-sessions` | `messageSessions(message, key?, hub?)` |
 | `/disconnect-sessions` | `disconnectSessions(key?, hub?)` |
-| `/storage list|get|create|update|delete` | `storage(action, hub, options?)` |
+| `/storage list\|get\|create\|update\|delete` | `storage(action, hub, options?)` |
 
 `getHubs()` lists accessible hubs. `getStats(hub?)` fetches the statistics used by the bot's statistics channels.
 
