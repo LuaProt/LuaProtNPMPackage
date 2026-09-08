@@ -1,13 +1,30 @@
 {
   "name": "luaprot",
-  "version": "1.1.1",
-  "description": "The official npm package for LuaProt. A documentation is not available yet.",
+  "version": "2.0.0",
+  "description": "The official LuaProt API client for JavaScript and TypeScript.",
   "main": "index.js",
+  "module": "index.mjs",
   "types": "index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "exports": {
+    ".": {
+      "import": { "types": "./index.d.mts", "default": "./index.mjs" },
+      "require": { "types": "./index.d.ts", "default": "./index.js" }
+    },
+    "./constants/state": { "types": "./constants/state.d.ts", "default": "./constants/state.js" },
+    "./package.json": "./package.json"
   },
-  "keywords": [],
+  "files": ["index.js", "index.mjs", "index.d.ts", "index.d.mts", "constants", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/client.test.cjs",
+    "check": "tsc --noEmit --strict --module NodeNext --moduleResolution NodeNext --target ES2022 test/types.mts test/types.cts",
+    "prepack": "npm test && npm run check"
+  },
+  "devDependencies": { "typescript": "~6.0.3" },
+  "keywords": ["luaprot", "roblox", "whitelist", "api", "typescript"],
+  "repository": { "type": "git", "url": "git+https://github.com/LuaProt/LuaProtNPMPackage.git" },
+  "homepage": "https://luaprot.net",
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
   "author": "leon4564",
   "license": "ISC",
   "packageManager": "pnpm@10.12.4"
