@@ -64,7 +64,7 @@ Methods follow the Discord bot's command names and argument order. `user` is a D
 | `/set-note` | `setNote(query, note)` |
 | `/compensate` | `compensate(query, time, includeAdvertise?)` |
 | `/compensate-all` | `compensateAll(time, includeAdvertise?)` |
-| `/get-keys` | `getKeys(hub?, page?, key?, user?, hwid?, note?, state?)` |
+| `/get-keys` | `getKeys(hub?, page?, key?, user?, hwid?, note?, state?, exact?)` |
 | `/blacklist` | `blacklist(user?, hwid?, key?, hub?, reason?)` |
 | `/remove-blacklist` | `removeBlacklist(user?, hwid?, key?, hub?, id?)` |
 | `/get-blacklists` | `getBlacklists(hub, hwid?)` |
@@ -90,11 +90,13 @@ The client performs LuaProt operations. It does not assign Discord roles, send D
 - `info()` accepts either `user` or `key`. `info(undefined, "license-key")` searches by key even when a default user is configured.
 - Notes are limited to 100 characters; blacklist reasons to 60. Lists accept arrays or comma/whitespace-separated strings, with duplicates removed.
 - Key states are `active`, `expired`, `blacklisted`, or `unassigned`; page defaults to 1.
+- `getKeys()` accepts a final `exact` argument, default `false`. Set it to `true` to match complete, case-sensitive hub names/IDs, keys, Discord IDs, HWIDs, and notes. Empty filters are ignored. This argument is not published yet.
 - `blacklist()` accepts exactly one user/HWID/key target. A missing hub applies to all matching accessible hubs. `removeBlacklist()` also accepts `hubId|type:entryId`, where type is `key`, `local`, or `global`.
 - Session messages are limited to 100 characters. Bulk session actions require either a key or a hub. `getSessions()` accepts a hub or a key/user query.
 
 ```js
 await luaProt.whitelist("123456789012345678", "hub-id", 7);
+const exactKey = await luaProt.getKeys(undefined, 1, "YOUR_KEY", undefined, undefined, undefined, undefined, true);
 await luaProt.generateKeys("hub-id", 10, 24, "Trial", ["script-id"]);
 await luaProt.compensate("id:123456789012345678", "1d 6h");
 await luaProt.messageSessions("Update available", undefined, "hub-id");

@@ -18,7 +18,7 @@ declare class LuaProt {
   compensateAll(time: string, includeAdvertise?: boolean): Promise<LuaProt.ApiResponse>;
   redeemKey(key: string, user?: string): Promise<LuaProt.ApiResponse>;
   getScript(script?: string, user?: string): Promise<LuaProt.ApiResponse & { hubId: string; key: string; script: string }>;
-  getKeys(hub?: string, page?: number, key?: string, user?: string, hwid?: string, note?: string, state?: LuaProt.KeyState): Promise<LuaProt.KeysResponse>;
+  getKeys(hub?: string, page?: number, key?: string, user?: string, hwid?: string, note?: string, state?: LuaProt.KeyState, exact?: boolean): Promise<LuaProt.KeysResponse>;
   blacklist(user?: string, hwid?: string, key?: string, hub?: string, reason?: string): Promise<LuaProt.ApiResponse | LuaProt.BatchResponse>;
   removeBlacklist(user?: string, hwid?: string, key?: string, hub?: string, id?: string): Promise<LuaProt.ApiResponse | LuaProt.BatchResponse>;
   getBlacklists(hub: string, hwid?: string): Promise<LuaProt.ApiResponse>;
