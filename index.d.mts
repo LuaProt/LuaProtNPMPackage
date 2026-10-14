@@ -8,6 +8,7 @@ export type Options = LuaProt.Options;
 export type ApiResponse = LuaProt.ApiResponse;
 export type Hub = LuaProt.Hub;
 export type Key = LuaProt.Key;
+export type KeyLimit = LuaProt.KeyLimit;
 export type BatchResponse = LuaProt.BatchResponse;
 export type StorageTarget = LuaProt.StorageTarget;
 export type StorageWrite = LuaProt.StorageWrite;

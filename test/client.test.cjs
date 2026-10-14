@@ -87,6 +87,9 @@ test("invalid arguments fail before any request", async () => {
     ["blacklist", ["123456789012345678", "hwid"]],
     ["blacklist", [undefined, "hwid", undefined, undefined, "x".repeat(61)]],
     ["sessionInfo", [".."]], ["getKeys", [undefined, 0]],
+    ...[0, 26, 200, 1001, 25.5, "25", null, true].map((limit) =>
+      ["getKeys", [undefined, 1, undefined, undefined, undefined, undefined, undefined, false, limit]]
+    ),
     ["storage", ["create", "hub", { valueId: "flag", key: "x", value: false }]],
     ["storage", ["create", "hub", { valueId: "flag", key: "license-key", value: {} }]],
     ["storage", ["create", "hub", { valueId: "flag", key: "license-key", value: NaN }]],

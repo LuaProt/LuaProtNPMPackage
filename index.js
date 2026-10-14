@@ -284,14 +284,16 @@ class LuaProt {
     return { success: true, hubId: found[0].hubId, key, script: loader };
   }
 
-  getKeys(hub, page = 1, key, user, hwid, note, state, exact = false) {
+  getKeys(hub, page = 1, key, user, hwid, note, state, exact = false, limit = 25) {
     if (typeof exact !== "boolean") throw new TypeError("exact must be a boolean.");
+    if (![25, 50, 100, 1000].includes(limit)) throw new TypeError("limit must be 25, 50, 100, or 1000.");
     if (state && !["active", "expired", "blacklisted", "unassigned"].includes(state)) throw new TypeError("Invalid key state.");
     return this.#request("GET", "/api/v1/keys/fetch", {
       hub, page: number(page, "page", 1, Number.MAX_SAFE_INTEGER, true), key,
       discordId: user ? discordId(user) : undefined, hwid, note,
       ...(state ? { [state]: true } : {}),
       ...(exact ? { exact: true } : {}),
+      ...(limit !== 25 ? { limit } : {}),
     });
   }
 

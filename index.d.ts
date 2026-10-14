@@ -18,7 +18,7 @@ declare class LuaProt {
   compensateAll(time: string, includeAdvertise?: boolean): Promise<LuaProt.ApiResponse>;
   redeemKey(key: string, user?: string): Promise<LuaProt.ApiResponse>;
   getScript(script?: string, user?: string): Promise<LuaProt.ApiResponse & { hubId: string; key: string; script: string }>;
-  getKeys(hub?: string, page?: number, key?: string, user?: string, hwid?: string, note?: string, state?: LuaProt.KeyState, exact?: boolean): Promise<LuaProt.KeysResponse>;
+  getKeys(hub?: string, page?: number, key?: string, user?: string, hwid?: string, note?: string, state?: LuaProt.KeyState, exact?: boolean, limit?: LuaProt.KeyLimit): Promise<LuaProt.KeysResponse>;
   blacklist(user?: string, hwid?: string, key?: string, hub?: string, reason?: string): Promise<LuaProt.ApiResponse | LuaProt.BatchResponse>;
   removeBlacklist(user?: string, hwid?: string, key?: string, hub?: string, id?: string): Promise<LuaProt.ApiResponse | LuaProt.BatchResponse>;
   getBlacklists(hub: string, hwid?: string): Promise<LuaProt.ApiResponse>;
@@ -67,7 +67,7 @@ declare namespace LuaProt {
   }
   interface HubsResponse extends ApiResponse { hubs: Hub[]; }
   interface KeyResponse extends ApiResponse { key: Key; }
-  interface KeysResponse extends ApiResponse { keys: Key[]; totalKeys?: number; totalPages?: number; }
+  interface KeysResponse extends ApiResponse { keys: Key[]; totalKeys?: number; totalPages?: number; limitPerPage?: KeyLimit; }
   interface GeneratedKeysResponse extends ApiResponse { keys: string[]; }
   interface StatusResponse extends ApiResponse { status?: string; version?: string | null; active?: boolean; validToken?: boolean; warnings?: Array<string | Record<string, unknown>>; }
   interface FindResponse extends ApiResponse { found: Array<{ hubId: string; hub: Hub; key: Key }>; }
@@ -83,6 +83,7 @@ declare namespace LuaProt {
   interface SessionsResponse extends ApiResponse { sessions: Session[]; }
   interface SessionResponse extends ApiResponse { session?: Session; }
   type KeyState = "active" | "expired" | "blacklisted" | "unassigned";
+  type KeyLimit = 25 | 50 | 100 | 1000;
   type StorageValue = string | number | boolean;
   interface StorageTarget { valueId?: string; key?: string; hwid?: string; id?: string; }
   interface StorageWrite extends StorageTarget {
