@@ -9,6 +9,7 @@ const enabled: number = constants.STATE.ENABLED;
 const error: Error = new LuaProtError("test", 400);
 await client.storage("create", "hub", { key: value, valueId: "flag", value: false });
 await client.getScript("demo", "123456789012345678");
+await client.compensateAll("1h", true, ["FIRST_KEY", "SECOND_KEY"]);
 const keyPage = await client.getKeys("hub", 1, undefined, undefined, undefined, undefined, undefined, false, 1000);
 const limit: LuaProt.KeyLimit | undefined = keyPage.limitPerPage;
 void limit;
@@ -22,5 +23,7 @@ client.whitelist(123);
 client.storage("create", "hub", { valueId: "flag", key: "license-key" });
 // @ts-expect-error unknown storage command
 client.storage("remove", "hub");
+// @ts-expect-error compensation keys must be strings
+client.compensateAll("1h", false, [123]);
 // @ts-expect-error unsupported key limit
 client.getKeys(undefined, 1, undefined, undefined, undefined, undefined, undefined, false, 200);

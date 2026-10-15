@@ -243,9 +243,9 @@ class LuaProt {
     return this.#change(keyTarget(query), "PATCH", "compensate", { expire: duration(time), includeAdvertise });
   }
 
-  compensateAll(time, includeAdvertise = false) {
+  compensateAll(time, includeAdvertise = false, keys) {
     if (typeof includeAdvertise !== "boolean") throw new TypeError("includeAdvertise must be a boolean.");
-    return this.#request("POST", "/api/v1/keys/compensate-all", {}, { expire: duration(time), includeAdvertise });
+    return this.#request("POST", "/api/v1/keys/compensate-all", {}, { expire: duration(time), includeAdvertise, ...(keys != null ? { keys: list(keys, "keys") } : {}) });
   }
 
   async redeemKey(key, user = this.#discordId) {

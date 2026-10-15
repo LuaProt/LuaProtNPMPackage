@@ -63,7 +63,7 @@ Methods follow the Discord bot's command names and argument order. `user` is a D
 | `/unfreeze-key` | `unfreezeKey(query)` |
 | `/set-note` | `setNote(query, note)` |
 | `/compensate` | `compensate(query, time, includeAdvertise?)` |
-| `/compensate-all` | `compensateAll(time, includeAdvertise?)` |
+| `/compensate-all` | `compensateAll(time, includeAdvertise?, keys?)` |
 | `/get-keys` | `getKeys(hub?, page?, key?, user?, hwid?, note?, state?, exact?, limit?)` |
 | `/blacklist` | `blacklist(user?, hwid?, key?, hub?, reason?)` |
 | `/remove-blacklist` | `removeBlacklist(user?, hwid?, key?, hub?, id?)` |
@@ -86,6 +86,7 @@ The client performs LuaProt operations. It does not assign Discord roles, send D
 - `whitelist()` uses the first accessible hub when `hub` is omitted. No duration means no expiry. Days, hours and minutes are whole numbers.
 - `generateKeys()` accepts 5–300 keys. Its `time` and `massWhitelist()`'s `time` are hours, at least 1, including fractional hours. Omit time for no expiry.
 - Compensation accepts durations like `2h`, `1d 6h`, `30m`, or `1w`, with a minimum of one minute. `includeAdvertise` defaults to `false`.
+- `compensateAll()` accepts optional `keys` to compensate only those keys. Omit it to compensate across your account. An empty list is rejected. This argument is not published yet.
 - `query` accepts a key, Discord ID, mention, `key:...`, or `id:...`. Use `key:` for a numeric key.
 - `info()` accepts either `user` or `key`. `info(undefined, "license-key")` searches by key even when a default user is configured.
 - Notes are limited to 100 characters; blacklist reasons to 60. Lists accept arrays or comma/whitespace-separated strings, with duplicates removed.

@@ -15,7 +15,7 @@ declare class LuaProt {
   unfreezeKey(query: string): Promise<LuaProt.BatchResponse>;
   setNote(query: string, note: string): Promise<LuaProt.BatchResponse>;
   compensate(query: string, time: string, includeAdvertise?: boolean): Promise<LuaProt.BatchResponse>;
-  compensateAll(time: string, includeAdvertise?: boolean): Promise<LuaProt.ApiResponse>;
+  compensateAll(time: string, includeAdvertise?: boolean, keys?: string | string[]): Promise<LuaProt.ApiResponse>;
   redeemKey(key: string, user?: string): Promise<LuaProt.ApiResponse>;
   getScript(script?: string, user?: string): Promise<LuaProt.ApiResponse & { hubId: string; key: string; script: string }>;
   getKeys(hub?: string, page?: number, key?: string, user?: string, hwid?: string, note?: string, state?: LuaProt.KeyState, exact?: boolean, limit?: LuaProt.KeyLimit): Promise<LuaProt.KeysResponse>;

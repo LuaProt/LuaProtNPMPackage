@@ -80,6 +80,7 @@ test("invalid arguments fail before any request", async () => {
     ["generateKeys", ["hub", 5, Infinity]], ["massWhitelist", [[], "hub"]],
     ["bulkDeleteKeys", [[]]], ["compensateAll", ["1h junk"]],
     ["compensateAll", ["30s"]], ["compensateAll", ["-1h"]],
+    ["compensateAll", ["1h", false, []]], ["compensateAll", ["1h", false, " , "]],
     ["messageSessions", ["hello"]], ["messageSessions", ["hello", "license-key", "hub"]],
     ["disconnectSessions", ["license-key", "hub"]], ["getSessions", ["license-key", undefined, "hub"]],
     ["messageSession", ["session", "x".repeat(101)]],
